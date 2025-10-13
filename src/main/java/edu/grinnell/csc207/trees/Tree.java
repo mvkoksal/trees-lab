@@ -47,16 +47,36 @@ public class Tree<T extends Comparable<? super T>> {
     }
 
     ///// Part 1: Contains
+    
+    // We'll recursively go all the way down the leftmost branches, comparing the value of the nodes to the value we're searching for.
+    // Then if the value has not been found, we go all the way down the rightmost brances recursively.
+
+
+    public boolean containsHelper(T value, Node<T> node){
+        if (node == null) {
+            return false;
+        } else {
+            if (node.value.equals(value)) {
+                return true;
+            } else{
+                return(containsHelper(value, node.left) || containsHelper(value, node.right));
+            }
+        }
+    }
 
     /**
      * @param value the value to search for
      * @return true iff the tree contains <code>value</code>
      */
     public boolean contains(T value) {
-        throw new UnsupportedOperationException();
+        return containsHelper(value, root);
     }
 
     ///// Part 2: toString
+    
+    // First we will create an empty string, for the first value we find we will simply append that value to the string.
+    // Then we'll recursively go all the way down the leftmost branches, appending a comma then the value of the nodes to the string.
+    // Then we'll recursively go all the way down the rightmost branches, appending a comma then the value of the nodes to the string.
    
     /**
      * @return a string represent of this tree in the form, "[x1, ..., xk]."

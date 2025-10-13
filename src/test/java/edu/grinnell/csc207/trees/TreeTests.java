@@ -10,7 +10,11 @@ import org.junit.jupiter.api.Test;
 public class TreeTests {
     private Tree<Integer> makeSampleTree() {
         // TODO: add your sample tree from the reading here!
-        Node<Integer> sampleTree = null;
+        Node<Integer> sampleTree = new Node<Integer>(5,
+                                            new Node<Integer>(2,
+                                                new Node<Integer>(1, null, null),
+                                                new Node<Integer>(3, null, null)),
+                                            new Node<Integer>(8, null, null));
         return new Tree<Integer>(sampleTree);
     }
 
