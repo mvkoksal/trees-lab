@@ -14,7 +14,13 @@ public class TreeTests {
                                             new Node<Integer>(2,
                                                 new Node<Integer>(1, null, null),
                                                 new Node<Integer>(3, null, null)),
-                                            new Node<Integer>(8, null, null));
+                                            new Node<Integer>(8,
+                                                 new Node<Integer>(7,
+                                                    new Node<Integer>(6, null, null),
+                                                    null),
+                                                 new Node<Integer>(9,
+                                                    new Node<Integer>(10, null, null),
+                                                    null)));
         return new Tree<Integer>(sampleTree);
     }
 
