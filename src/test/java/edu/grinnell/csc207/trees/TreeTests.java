@@ -19,8 +19,8 @@ public class TreeTests {
                                                     new Node<Integer>(6, null, null),
                                                     null),
                                                  new Node<Integer>(9,
-                                                    new Node<Integer>(10, null, null),
-                                                    null)));
+                                                    null,
+                                                    new Node<Integer>(10, null, null))));
         return new Tree<Integer>(sampleTree);
     }
 
@@ -58,7 +58,7 @@ public class TreeTests {
     @Test
     public void sampleTreeToStringTest() {
         Tree<Integer> sampleTree = makeSampleTree();
-        assertEquals("TODO: fille me in with the intended results of your toString implementation", sampleTree.toString());
+        assertEquals("[5,2,1,3,8,7,6,9,10]", sampleTree.toString());
     }
 
     @Test

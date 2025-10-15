@@ -1,5 +1,6 @@
 package edu.grinnell.csc207.trees;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -78,36 +79,87 @@ public class Tree<T extends Comparable<? super T>> {
     // Then we'll recursively go all the way down the leftmost branches, appending a comma then the value of the nodes to the string.
     // Then we'll recursively go all the way down the rightmost branches, appending a comma then the value of the nodes to the string.
    
+    public void toStringHelper(Node<T> node, StringBuffer buf){
+        if (node != null) {
+            buf.append(",");
+            buf.append(node.value);
+            toStringHelper(node.left, buf);
+            toStringHelper(node.right, buf);
+        }
+    }
+
     /**
      * @return a string represent of this tree in the form, "[x1, ..., xk]."
      * The order of the elements is left unspecified.
      */
     @Override
     public String toString() {
-        throw new UnsupportedOperationException();
+        if(root != null){
+            StringBuffer buf = new StringBuffer("[");
+            buf.append(root.value);
+            toStringHelper(root.left, buf);
+            toStringHelper(root.right, buf);
+            buf.append("]");
+            return buf.toString();
+        } else{return "[]";}
     }
 
     ///// Part 3: Traversals
-
+    /// 
+    public void toListInorderHelper(Node<T> node, List<T> newList){
+        if (node != null) {
+            toListInorderHelper(node.left, newList);
+            newList.add(node.value);
+            toListInorderHelper(node.right, newList);
+        }
+    }
+    // If leaf return, else if node do a recursive call on the left branch, add value to string then 
+    // followed by a recursive call on the right branch, then add value to string then .
     /**
      * @return the elements of this tree collected via an in-order traversal
      */
     public List<T> toListInorder() {
-        throw new UnsupportedOperationException();
+        List<T> newList = new ArrayList<>();
+        toListInorderHelper(root, newList);
+        return newList;
     }
 
+    public void toListPreorderHelper(Node<T> node, List<T> newList){
+        if (node != null) {
+            newList.add(node.value);
+            toListPreorderHelper(node.left, newList);
+            toListPreorderHelper(node.right, newList);
+        }
+    }
+
+    // If leaf return, else if node add value to string then do a recursive call on the left branch
+    // followed by a recursive call on the right branch.
     /**
      * @return the elements of this tree collected via a pre-order traversal
      */
     public List<T> toListPreorder() {
-        throw new UnsupportedOperationException();
+        List<T> newList = new ArrayList<>();
+        toListPreorderHelper(root, newList);
+        return newList;
     }
 
+
+    public void toListPostorderHelper(Node<T> node, List<T> newList){
+        if (node != null) {
+            toListPostorderHelper(node.left, newList);
+            toListPostorderHelper(node.right, newList);
+            newList.add(node.value);
+        }
+    }
+    // If leaf return, else if node do a recursive call on the left branch, 
+    // followed by a recursive call on the right branch, then add values to string .
     /**
-     * @return the elements of this tree collected via a post-order traversal
+     * @return the elements of this tree collected via an post-order traversal
      */
     public List<T> toListPostorder() {
-        throw new UnsupportedOperationException();
+        List<T> newList = new ArrayList<>();
+        toListPostorderHelper(root, newList);
+        return newList;
     }
 
     ///// Extra: Pretty Printing
